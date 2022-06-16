@@ -1,0 +1,48 @@
+body {
+    padding: 0 40px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+hr {
+    padding: 0;
+    margin: 0;
+}
+
+#current-date, #calculated-date {
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+}
+
+#current-date p, #calculated-date p {
+    margin: 10px;
+}
+
+.calculations-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.calculations-body button {
+    background: none;
+    /* border: 10px; */
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+}
+
+.calculations-body button:hover {
+    background: lightgray;
+}
+
+.text-center {
+    text-align: center;
+}
