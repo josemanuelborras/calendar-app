@@ -18,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://$JOMI@github.com/jomiborras/calendar-app"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
