@@ -1,6 +1,6 @@
 body {
     padding: 0 40px;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, Arial, sans-serif;
 }
 
 h1 {
@@ -12,17 +12,39 @@ hr {
     margin: 0;
 }
 
-#current-date, #calculated-date {
+#current-date,
+.calculated-date {
     display: flex;
     justify-content: start;
     align-items: baseline;
 }
 
-#current-date p, #calculated-date p {
+#current-date p,
+.calculated-date p {
     margin: 10px;
 }
 
-.calculations-body{
+.days-of-week {
+    font-weight: bold;
+}
+
+.days-of-week,
+.days-grid {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.days-of-week ol,
+.days-grid ol,
+.days-of-week li,
+.days-grid li {
+    /* padding: 0;
+    margin: 0; */
+    list-style: none;
+}
+
+.calculations-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,7 +53,6 @@ hr {
 
 .calculations-body button {
     background: none;
-    /* border: 10px; */
     border-radius: 50%;
     cursor: pointer;
     width: 30px;
@@ -39,10 +60,25 @@ hr {
     font-weight: bold;
 }
 
+.reset button:hover,
 .calculations-body button:hover {
-    background: lightgray;
+    background: #000;
+    color: #fff;
 }
 
 .text-center {
     text-align: center;
+}
+
+.reset button {
+    background: #fff;
+    cursor: pointer;
+    padding: 10px 25px;
+    font-weight: bold;
+}
+
+.reset button:active,
+.calculations-body button:active {
+    background: #525252;
+    color: #fff;
 }
