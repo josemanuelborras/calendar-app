@@ -122,14 +122,32 @@ const DateHook = () => {
         return days;
     }
 
+    // Sets boolean for current month
+    const currentMonth = (date, monthDate) => {
+        if(date.getMonth() === monthDate.getMonth()){
+                return true;
+        } else {
+            return false;
+        }
+    }
+
     // Sets the 42 days in the calendar's month structure, from the first Sunday, to the last Saturday
     const calendarDays = (date, monthFirstDay) => {
         const getDays = (startDate, endDate) => {
             let dates = [];
-            const date = new Date(startDate);
-            while (date <= endDate){
-                dates = [...dates, new Date(date)];
-                date.setDate(date.getDate() + 1);
+            const monthDate = new Date(startDate);
+            console.log(date);
+            while (monthDate <= endDate){
+                dates = [...dates, {
+                    year: monthDate.getFullYear(),
+                    monthNumber: monthDate.getMonth(),
+                    month: getMonth(monthDate.getMonth()),
+                    date: monthDate.getDate(),
+                    day: getDay(monthDate.getDay()),
+                    dayNumber: monthDate.getDay(),
+                    currentMonth: currentMonth(date, monthDate)
+                }];
+                monthDate.setDate(monthDate.getDate() + 1);
             }
             return dates;
         }
@@ -176,10 +194,17 @@ const DateHook = () => {
     const weekDays = (date) => {
         const getDays = (startDate, endDate) => {
             let dates = [];
-            const date = new Date(startDate);
-            while (date <= endDate) {
-                dates = [...dates, new Date(date)];
-                date.setDate(date.getDate() + 1);
+            const weekDate = new Date(startDate);
+            while (weekDate <= endDate) {
+                dates = [...dates, {
+                    year: weekDate.getFullYear(),
+                    monthNumber: weekDate.getMonth(),
+                    month: getMonth(weekDate.getMonth()),
+                    date: weekDate.getDate(),
+                    day: getDay(weekDate.getDay()),
+                    dayNumber: weekDate.getDay()
+                }];
+                weekDate.setDate(weekDate.getDate() + 1);
             }
             return dates;
         }

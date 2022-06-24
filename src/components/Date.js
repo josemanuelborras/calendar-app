@@ -6,7 +6,6 @@ import '../css/calendar.css';
 const Calendar = () => {
 
     const {
-
         today,
         dating,
         nextYear,
@@ -23,7 +22,7 @@ const Calendar = () => {
     } = useTime();
 
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday"];
-    // console.log(dating)
+
     return (
         <div className='text-center'>
             <div className='title'>
@@ -95,7 +94,7 @@ const Calendar = () => {
                         {dating.monthDates.last.year}
                     </p>
                 </div>
-                
+
                 <div className="calculations-body">
                     <button title="Previous Month" onClick={() => lastMonth()}> {"<"} </button>
                     <h3>{dating.month}</h3>
@@ -120,9 +119,9 @@ const Calendar = () => {
                         {
                             dating.calendarDays.map(d => (
                                 <li
-                                    id={`${d.getDate()}/${d.getMonth()}`}
-                                    key={`${d.getDate()}/${d.getMonth()}`}>
-                                    {d.getDate()}
+                                    id={`${d.monthNumber}/${d.date}`}
+                                    key={`${d.monthNumber}/${d.date}`}>
+                                    {d.date}
                                 </li>
                             ))
                         }
@@ -160,11 +159,11 @@ const Calendar = () => {
                     <h3>{dating.week}</h3>
                     <button title="NextWeek" onClick={() => nextWeek()}> {">"} </button>
                 </div>
-                <div id="calendar-table">                    
+                <div id="calendar-table">
                     <ol className="days-of-week">
                         {
                             weekDays.map(d => (
-                                <li 
+                                <li
                                     id={d}
                                     key={d}
                                 >
@@ -175,12 +174,12 @@ const Calendar = () => {
                     </ol>
 
                     <ol className="days-grid">
-                    {
+                        {
                             dating.weekDays.map(d => (
                                 <li
-                                    id={`${d.getDate()}/${d.getMonth()}`}
-                                    key={`${d.getDate()}/${d.getMonth()}`}>
-                                    {d.getDate()}
+                                    id={`${d.monthNumber}/${d.date}`}
+                                    key={`${d.monthNumber}/${d.date}`}>
+                                    {d.date}
                                 </li>
                             ))
                         }
