@@ -2,8 +2,14 @@ import { useState, useMemo } from 'react';
 
 const DateHook = () => {
 
-    // Sets current day.
-    const current = useMemo(() => new Date(), []);
+    // Sets current day. Setting with constants for each element to get 00:00:00 on hour, minutes and seconds.
+    // const current = useMemo(() => new Date(), []);
+
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currenDate = new Date().getDate();    
+    
+    const current = useMemo(() => new Date(currentYear, currentMonth, currenDate), [currentYear, currentMonth, currenDate]);
 
     // Month names
     const getMonth = (month) => {
@@ -34,14 +40,13 @@ const DateHook = () => {
 
     // Gets the week numbre inside current year
     const getWeek = (date) => {
-        const today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         const yearsFirstDay = new Date(date.getFullYear(), 0, 1);
-        return Math.ceil((Math.floor((today - yearsFirstDay)/(24*60*60*1000)))/7);
+        return Math.ceil((Math.floor((date - yearsFirstDay)/(24*60*60*1000)))/7);
     }
 
     // Sets a current property inside date object to recognize current date
     const getCurrent = (date) => {
-        if(date === current){
+        if(date.getFullYear() === current.getFullYear() && date.getMonth() === current.getMonth() && date.getDate() === current.getDate()){
             return true;
         } else {
             return false;
@@ -123,7 +128,7 @@ const DateHook = () => {
     }
 
     // Sets boolean for current month
-    const currentMonth = (date, monthDate) => {
+    const isCurrentMonth = (date, monthDate) => {
         if(date.getMonth() === monthDate.getMonth()){
                 return true;
         } else {
@@ -135,8 +140,8 @@ const DateHook = () => {
     const calendarDays = (date, monthFirstDay) => {
         const getDays = (startDate, endDate) => {
             let dates = [];
-            const monthDate = new Date(startDate);
-            console.log(date);
+            let monthDate = startDate;
+            
             while (monthDate <= endDate){
                 dates = [...dates, {
                     year: monthDate.getFullYear(),
@@ -145,9 +150,10 @@ const DateHook = () => {
                     date: monthDate.getDate(),
                     day: getDay(monthDate.getDay()),
                     dayNumber: monthDate.getDay(),
-                    currentMonth: currentMonth(date, monthDate)
+                    isCurrentMonth: isCurrentMonth(date, monthDate),
+                    currentDay: getCurrent(monthDate)
                 }];
-                monthDate.setDate(monthDate.getDate() + 1);
+                monthDate = new Date(monthDate.getFullYear(), monthDate.getMonth(), monthDate.getDate() + 1);
             }
             return dates;
         }
@@ -202,7 +208,9 @@ const DateHook = () => {
                     month: getMonth(weekDate.getMonth()),
                     date: weekDate.getDate(),
                     day: getDay(weekDate.getDay()),
-                    dayNumber: weekDate.getDay()
+                    dayNumber: weekDate.getDay(),
+                    isCurrentMonth: isCurrentMonth(date, weekDate),
+                    currentDay: getCurrent(weekDate)
                 }];
                 weekDate.setDate(weekDate.getDate() + 1);
             }
@@ -276,6 +284,7 @@ const DateHook = () => {
     // Weeks counters
     const nextWeek = () => {
         const newDate = new Date(dating.year, dating.monthNumber, dating.date + 7);
+        console.log(newDate);
         setDating(getDate(newDate));
     }
 

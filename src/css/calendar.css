@@ -39,9 +39,11 @@ hr {
 .days-grid ol,
 .days-of-week li,
 .days-grid li {
-    /* padding: 0;
-    margin: 0; */
     list-style: none;
+}
+
+.days-grid li{
+    cursor: pointer;
 }
 
 .calculations-body {
@@ -81,4 +83,18 @@ hr {
 .calculations-body button:active {
     background: #525252;
     color: #fff;
+}
+
+.today {
+    font-weight: bold;
+    border: solid;
+}
+
+.isMonth{
+    background-color: lightgray;
+}
+
+.isNotMonth {
+    background-color: gray;
+    color: white;
 }

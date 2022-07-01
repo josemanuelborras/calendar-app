@@ -3,6 +3,22 @@ import useTime from '../hooks/useDate';
 
 import '../css/calendar.css';
 
+const CalendarDate = ({ dating }) => {
+    console.log(dating)
+    return (
+
+        dating.calendarDays.map(d => (
+            <li
+                id={`${d.monthNumber}/${d.date}`}
+                key={`${d.monthNumber}/${d.date}`}
+                className={d.currentDay ? "today" : "" || d.isCurrentMonth ? "isMonth" : "isNotMonth"}>
+                {d.date}
+            </li>
+        ))
+
+    )
+}
+
 const Calendar = () => {
 
     const {
@@ -106,26 +122,15 @@ const Calendar = () => {
                             weekDays.map(d => (
                                 <li
                                     id={d}
-                                    key={d}
-                                >
+                                    key={d}>
                                     {d}
                                 </li>
                             ))
                         }
-
                     </ol>
 
                     <ol className="days-grid">
-                        {
-                            dating.calendarDays.map(d => (
-                                <li
-                                    id={`${d.monthNumber}/${d.date}`}
-                                    key={`${d.monthNumber}/${d.date}`}>
-                                    {d.date}
-                                </li>
-                            ))
-                        }
-
+                        <CalendarDate dating={dating} />
                     </ol>
                 </div>
             </div>
@@ -175,13 +180,26 @@ const Calendar = () => {
 
                     <ol className="days-grid">
                         {
-                            dating.weekDays.map(d => (
-                                <li
-                                    id={`${d.monthNumber}/${d.date}`}
-                                    key={`${d.monthNumber}/${d.date}`}>
-                                    {d.date}
-                                </li>
-                            ))
+                            dating.weekDays.map(d => {
+                                if (d.currentDay) {
+                                    return (
+                                        <li
+                                            id={`${d.month}/${d.date}`}
+                                            key={`${d.month}/${d.date}`}
+                                            className="today">
+                                            {d.date}
+                                        </li>
+                                    )
+                                } else {
+                                    return (
+                                        <li
+                                            id={`${d.month}/${d.date}`}
+                                            key={`${d.month}/${d.date}`}>
+                                            {d.date}
+                                        </li>
+                                    )
+                                }
+                            })
                         }
                     </ol>
                 </div>
